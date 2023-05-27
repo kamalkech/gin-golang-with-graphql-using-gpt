@@ -1,8 +1,8 @@
-package gql
+package userGql
 
 import (
 	"fmt"
-	"github.com/dyalicode/with-graphql-using-gpt/models"
+	"github.com/dyalicode/with-graphql-using-gpt/user/model"
 	"github.com/graphql-go/graphql"
 )
 
@@ -40,7 +40,7 @@ var UserQuery = graphql.NewObject(graphql.ObjectConfig{
 // Resolver functions for user queries
 func GetUsersResolver(p graphql.ResolveParams) (interface{}, error) {
 	// Implement your logic here
-	return []models.User{
+	return []userModel.User{
 		{ID: "1", Name: "User 1", Email: "user1@example.com"},
 		{ID: "2", Name: "User 2", Email: "user2@example.com"},
 	}, nil
@@ -55,5 +55,5 @@ func GetUserByIDResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	// Query the database or perform any required operations to get the user by ID
 	// For now, returning a dummy user
-	return models.User{ID: userID, Name: "Sample User", Email: "sampleuser@example.com"}, nil
+	return userModel.User{ID: userID, Name: "Sample User", Email: "sampleuser@example.com"}, nil
 }

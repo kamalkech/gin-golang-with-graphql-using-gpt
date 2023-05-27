@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/dyalicode/with-graphql-using-gpt/gql"
+	"github.com/dyalicode/with-graphql-using-gpt/article/gql"
+	"github.com/dyalicode/with-graphql-using-gpt/user/gql"
 	"github.com/graphql-go/graphql"
 	"log"
 )
@@ -13,21 +14,21 @@ func UseSchema() (graphql.Schema, error){
 		Fields: graphql.Fields{},
 	})
 
-	// Merge All queries.
+	// ********************* Merge All queries. ************************//
 	RootQuery.AddFieldConfig("queryArticle", &graphql.Field{
-		Type: gql.ArticleQuery,
+		Type: articleGql.ArticleQuery,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			return nil, nil
 		},
 	})
 	RootQuery.AddFieldConfig("queryUser", &graphql.Field{
-		Type: gql.UserQuery,
+		Type: userGql.UserQuery,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			return "query user", nil
 		},
 	})
 
-	// Merge All mutations
+	// ********************* Merge All mutation. ************************//
 
 	// Create the schema using the root query
 	SchemaConfig := graphql.SchemaConfig{

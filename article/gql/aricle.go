@@ -1,9 +1,9 @@
-package gql
+package articleGql
 
 import (
 	"fmt"
-	"github.com/dyalicode/with-graphql-using-gpt/models"
 	"github.com/graphql-go/graphql"
+	"github.com/dyalicode/with-graphql-using-gpt/article/model"
 )
 
 // Create article type
@@ -29,6 +29,18 @@ var ArticleQueryFields = graphql.Fields{
 		Args:    graphql.FieldConfigArgument{"id": &graphql.ArgumentConfig{Type: graphql.String}},
 		Resolve: GetArticleByIDResolver,
 	},
+	"articleByTitle": &graphql.Field{
+		Type:    graphql.String,
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			return "return article By Title", nil
+		},
+	},
+	"articleByAuthor": &graphql.Field{
+		Type:    graphql.String,
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			return "return article By Author", nil
+		},
+	},
 }
 
 // Create a separate object to hold the article queries
@@ -40,7 +52,7 @@ var ArticleQuery = graphql.NewObject(graphql.ObjectConfig{
 // Resolver functions for article queries
 func GetArticlesResolver(p graphql.ResolveParams) (interface{}, error) {
 	// Implement your logic here
-	return []models.Article{
+	return []articleModel.Article{
 		{ID: "1", Title: "Article 1", Content: "Content 1"},
 		{ID: "2", Title: "Article 2", Content: "Content 2"},
 	}, nil
@@ -55,5 +67,5 @@ func GetArticleByIDResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	// Query the database or perform any required operations to get the article by ID
 	// For now, returning a dummy article
-	return models.Article{ID: articleID, Title: "Sample Article", Content: "Sample Content"}, nil
+	return articleModel.Article{ID: articleID, Title: "Sample Article", Content: "Sample Content"}, nil
 }
